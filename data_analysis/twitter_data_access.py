@@ -15,7 +15,8 @@ class PrintListener(StreamListener):
     def on_status(self, status):
         if not status.text[:3] == 'RT ':
             print(status.text)
-            print(status.author.screen_name, status.created_at, status.source, '\n')
+            print(status.author.screen_name, status.created_at,
+                  status.source, '\n')
 
     def on_error(self, status_code):
         print('Error Code: {}'.format(status_code))
@@ -43,4 +44,3 @@ def pull_down_tweets(screen_name):
 if __name__ == '__main__':
     #  print_to_terminal()
     pull_down_tweets(auth.username)
-   
