@@ -1,9 +1,10 @@
 import json
 from os import path
 
+from sqlalchemy.orm.exc import NoResultFound
 from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
-from sqlalchemy.orm.exc import NoResultFound
+
 from data_analysis.database import session, Tweet, Hashtag, User
 
 consumer_key = '8zhY3gkSuNxnUvQVlLxxYYwGv'
@@ -63,6 +64,7 @@ def create_user_helper(user_data):
                 created_at=u['created_at'],
                 description=u.get('description'),
                 followers_count=u['followers_count'],
+                friends_count=u['friends_count'],
                 statuses_count=u['statuses_count'],
                 favourites_count=u['favourites_count'],
                 listed_count=u['listed_count'],
