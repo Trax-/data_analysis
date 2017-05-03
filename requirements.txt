@@ -1,3 +1,5 @@
+twython
+scipy
 jupyter
 nltk
 numpy
