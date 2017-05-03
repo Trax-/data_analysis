@@ -7,7 +7,7 @@ setup(
     license='BSD',
     author='Trevor Obermann',
     packages=find_packages(),
-    install_requires=['PyQt5', 'pandas', 'sqlalchemy', 'nltk', 'numpy', 'jupyter', 'python-twitter'],
+    install_requires=['PyQt5', 'pandas', 'sqlalchemy', 'nltk', 'numpy', 'jupyter', 'python-twitter', 'scipy'],
     entry_points={},
     extras_require={'dev': ['flake8', ]},
 )
