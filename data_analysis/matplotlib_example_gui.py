@@ -24,16 +24,15 @@ def main():
 class TabWidget(QtWidgets.QTabWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        # we'll add tabs here using the addTab method
         xy_scatter_widget = XYScatterGraphWidget()
         pie_widget = PieGraphWidget()
         bar_widget = BarGraphWidget()
         graph_widget = GraphWidget()
 
+        self.addTab(graph_widget, 'Graph Widget')
         self.addTab(bar_widget, 'Bar Graph')
         self.addTab(xy_scatter_widget, 'Scatter Graph')
         self.addTab(pie_widget, 'Pie Graph')
-        self.addTab(graph_widget, 'Graph')
 
 
 class GraphWidget(QtWidgets.QWidget):
@@ -41,11 +40,11 @@ class GraphWidget(QtWidgets.QWidget):
         super().__init__(parent)
         self._figure = plt.Figure()
 
-        # Widget
+        # Widget!
         self._canvas = FigureCanvas(self._figure)
-        # Widget
+        # widget!
         toolbar = NavToolbar(self._canvas, self)
-        # Widget
+        # Widget!
         plot_button = QtWidgets.QPushButton('Plot!')
         plot_button.clicked.connect(self.plot)
 
@@ -59,10 +58,11 @@ class GraphWidget(QtWidgets.QWidget):
 
     """
         self.random_signal.connect(self.random_slot)
-        self.random_signal.emit('Hello', 5, False)
+        self.random_signal.emit('hello', 5, False)
 
     random_signal = QtCore.pyqtSignal(str, int, bool)
 
+    # you can add decorator in, but it's optional
     @QtCore.pyqtSlot(str, int, bool)
     def random_slot(self, string, integer, boolean, *args, **kwargs):
         print(string, integer, boolean)
@@ -74,10 +74,10 @@ class GraphWidget(QtWidgets.QWidget):
         ax.set_yscale('log')
         ax.set_xlim(-1, 6)
         ax.set_ylim(-1, 3)
-        ax.set_xlabel('This is the X label')
-        ax.set_ylabel("This is the Y label")
+        ax.set_xlabel('This is an x label')
+        ax.set_ylabel('Set a Y label')
         ax.legend()
-        ax.set_title('This is a Title')
+        ax.set_title('A really cool default chart')
 
         ax.plot(data, '*-', label=time.time())
         self.update_canvas()
@@ -104,15 +104,17 @@ class PieGraphWidget(GraphWidget):
         labels = ['Eaten', 'Uneaten', 'Eat next']
         n = len(labels)
         data = np.random.rand(n) * 100
-        # Control how percentages are displayed
+        # control how the percentages are displayed
         autopct = '%1.1f%%'
         # colors = ['r', 'g', 'b']
         explode = np.zeros(n)
         explode[-1] = 0.1
+
         self._figure.clear()
 
         ax = self._figure.add_subplot(111)
-        ax.pie(data, explode=explode, labels=labels, autopct=autopct, shadow=True, startangle=90)
+        ax.pie(data, explode=explode, labels=labels,
+               autopct=autopct, shadow=True, startangle=90)
 
         self.update_canvas()
 
